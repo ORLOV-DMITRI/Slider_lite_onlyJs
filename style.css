@@ -18,11 +18,11 @@ body{
   align-items: center;
 }
 .container {
-  max-width: 1200px;
+  min-width: 1200px;
   height: 100vh;
   padding: 0 25px;
   margin: 0 auto;
-  /* border: 1px solid black; */
+  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -43,11 +43,11 @@ body{
   height: 300px;
   /* padding-right: 40px; */
 /* padding-left: 12px; */
-  object-fit: cover;
+  object-fit: contain;
   /* border: 1px solid red; */
   position: absolute;
   background: white;
-  object-fit: cover;
+
 
 }
 .slider {
