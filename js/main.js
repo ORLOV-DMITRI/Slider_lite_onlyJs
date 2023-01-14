@@ -2,14 +2,15 @@
 const BtnBack = document.querySelector(".slider-back");
 const BtnNext = document.querySelector(".slider-next");
 const SelectCountSlider = document.querySelector(".select-number");
-const SendSelect = document.querySelector(".send");
 const srcSlide = [];
 let classNumber = 0;
 let newSrc = [];
 let offset = 0;
 let countSlide = 1;
 const speedAnimation = 1;
+const stepStop = 5;
 let currentSliderCount = [];
+
 
 
 
@@ -20,7 +21,7 @@ ReloadSlider();
 
 BtnNext.onclick = SlideNext;
 BtnBack.onclick = SlideBack;
-SendSelect.onclick = ReloadSlider;
+SelectCountSlider.onchange = ReloadSlider;
 
 
 
@@ -37,6 +38,7 @@ function ReloadSlider() {
 }
 function GetCurrentSliderCount() {
   countSlide = Number(SelectCountSlider.value);
+  console.log(countSlide);
   GetCountSlide(countSlide);
   newSrc = [];
   for (let i = 0; i < countSlide; i++) {
@@ -101,7 +103,7 @@ function SlideBack() {
 //Создает следующий слайд на основе предидущего
 function TimerSlideNext() {
   CreateSlideGeneric(GetClassNumberGeneric("next"), 530);
-  GetOffsetAnimationGeneric(-5, 530, -5, speedAnimation);
+  GetOffsetAnimationGeneric(-stepStop, 530, -stepStop, speedAnimation);
   //Если назад то stepPosition = 5, currentPositionIndex1 = -530; stopIntervalPosition = 5;
   //Если вперед то stepPosition = -5, currentPositionIndex1 = 530; stopIntervalPosition = -5;
 }
@@ -109,7 +111,7 @@ function TimerSlideNext() {
 //Создает следующий слайд на основе предидущего в обратном направлении
 function TimerSlideBack() {
   CreateSlideGeneric(GetClassNumberGeneric("back"), -530);
-  GetOffsetAnimationGeneric(5, -530, 5, speedAnimation);
+  GetOffsetAnimationGeneric(stepStop, -530, stepStop, speedAnimation);
   //Если назад то stepPosition = 5, currentPositionIndex1 = -530; stopIntervalPosition = 5;
   //Если вперед то stepPosition = -5, currentPositionIndex1 = -530; stopIntervalPosition = -5;
 }
