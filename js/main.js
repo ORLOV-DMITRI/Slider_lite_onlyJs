@@ -21,54 +21,50 @@ BtnNext.onclick = SlideNext;
 BtnBack.onclick = SlideBack;
 SelectCountSlider.onchange = ReloadSlider;
 
-// (length-end+start>end-start+1) 
+// (length-end+start>end-start+1)
 
 DotsList.onclick = (event) => {
   Dots(event);
-  
- 
 };
 
 function Dots(event) {
-    DotsList.classList.add('dots-event-non');
-    if (event.target.classList.contains("dot-activ")) return;
-    if (!event.target.classList.contains("btn-check")) return;
-  
-    let tapDotsClass = event.target.className;
-    let tapDotsNum = parseInt(tapDotsClass.match(/\d+/));
-    console.log(tapDotsNum + "На которую нажал");
-    let x = 0;
-    let alldots = document.querySelectorAll(".dots-check");
-    let activ = document.querySelector(".dot-activ").className;
-    let activNum = parseInt(activ.match(/\d+/));
-  
-    if (tapDotsNum > activNum) {
-      let timer = setInterval(() => {
-        SlideNext();
-        let activ = document.querySelector(".dot-activ").className;
-        let activNum = parseInt(activ.match(/\d+/));
-        console.log(activNum +1+ "там где класс активный");
-        if (activNum + 1 === tapDotsNum) {
-          clearInterval(timer);
-          DotsList.classList.remove('dots-event-non');
-        }
-      }, 1000);
-    } else if (tapDotsNum < activNum) {
-      let timer = setInterval(() => {
-        SlideBack();
-        let activ = document.querySelector(".dot-activ").className;
-        let activNum = parseInt(activ.match(/\d+/));
-        console.log(activNum +1 +"там где класс активный");
-        if (activNum - 1 === tapDotsNum) {
-          clearInterval(timer);
-          DotsList.classList.remove('dots-event-non');
-        }
-      }, 1000);
-      console.log(tapDotsNum - activNum);
-    }
-    
-  }
+  DotsList.classList.add("dots-event-non");
+  if (event.target.classList.contains("dot-activ")) return;
+  if (!event.target.classList.contains("btn-check")) return;
 
+  let tapDotsClass = event.target.className;
+  let tapDotsNum = parseInt(tapDotsClass.match(/\d+/));
+  console.log(tapDotsNum + "На которую нажал");
+  let x = 0;
+  let alldots = document.querySelectorAll(".dots-check");
+  let activ = document.querySelector(".dot-activ").className;
+  let activNum = parseInt(activ.match(/\d+/));
+
+  if (tapDotsNum > activNum) {
+    let timer = setInterval(() => {
+      SlideNext();
+      let activ = document.querySelector(".dot-activ").className;
+      let activNum = parseInt(activ.match(/\d+/));
+      console.log(activNum + 1 + "там где класс активный");
+      if (activNum + 1 === tapDotsNum) {
+        clearInterval(timer);
+        DotsList.classList.remove("dots-event-non");
+      }
+    }, 1000);
+  } else if (tapDotsNum < activNum) {
+    let timer = setInterval(() => {
+      SlideBack();
+      let activ = document.querySelector(".dot-activ").className;
+      let activNum = parseInt(activ.match(/\d+/));
+      console.log(activNum + 1 + "там где класс активный");
+      if (activNum - 1 === tapDotsNum) {
+        clearInterval(timer);
+        DotsList.classList.remove("dots-event-non");
+      }
+    }, 1000);
+    console.log(tapDotsNum - activNum);
+  }
+}
 
 //Оценивает текущие положение активного слайда и делает активной нужную точку
 function RenderDots() {
@@ -306,20 +302,9 @@ function GetOffsetAnimationGeneric(
   //Если вперед то stepPosition = -5, currentPositionIndex1 = -530; stopIntervalPosition = -5;
 }
 
-
-
-
-
-
-
-
-
-
-
 // есть текущее 4 а нажатое 10, вперед 5 шагов, назад 3 шага
 
-
-// (length-end+start>end-start+1) 
+// (length-end+start>end-start+1)
 // // Если длина минус конец плюс начало больше чем конец минус начало плюс 1
 
 // const t = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
@@ -330,15 +315,11 @@ function GetOffsetAnimationGeneric(
 // let первоеУсловие = длина - нажал + текущее; 4
 // let второеУсловие = нажал - текущее +1;7
 
-
-
-
 // let n = 0;
 // for (let j = текущее; j > 1; j--) {
 //       n++;
 // }
 // console.log(n +1+ ' шагов назад');
-
 
 // let k = 0;
 
@@ -348,10 +329,6 @@ function GetOffsetAnimationGeneric(
 // }
 // console.log(k+' шагов вперед');
 
-
-
-
-
 // let текущее = 4;//2
 // let нажал = 10;//8
 
@@ -360,7 +337,6 @@ function GetOffsetAnimationGeneric(
 //       n++;
 // }
 // console.log(n +1+ ' шагов назад');
-
 
 // let k = 0;
 
