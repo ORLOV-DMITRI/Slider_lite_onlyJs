@@ -2,6 +2,7 @@
 const BtnBack = document.querySelector(".slider-back");
 const BtnNext = document.querySelector(".slider-next");
 const SelectCountSlider = document.querySelector(".select-number");
+const DotsList = document.querySelector(".dots-check");
 const srcSlide = [];
 let classNumber = 0;
 let newSrc = [];
@@ -10,10 +11,7 @@ let countSlide = 1;
 const speedAnimation = 1;
 const stepStop = 5;
 let currentSliderCount = [];
-
-
-
-
+let dotNumber = 1;
 
 CopySrc();
 CreateSlide();
@@ -23,22 +21,38 @@ BtnNext.onclick = SlideNext;
 BtnBack.onclick = SlideBack;
 SelectCountSlider.onchange = ReloadSlider;
 
+// Render();
 
+function Render() {
+  let timer = setInterval(() => {
+    let tempSlideHtml = document.querySelectorAll(".slide-single");
+    let tempClassName = tempSlideHtml[0].className;
+    classNumber = parseInt(tempClassName.match(/\d+/));
+    console.log(classNumber);
 
-
-
-
+    let curDot = document.querySelector(`.dot--${classNumber}`);
+    curDot.classList.add("dot-activ");
+    let allDots = document.querySelectorAll(".btn-check");
+    for (let i = 0; i < allDots.length; i++) {
+      if (i == classNumber - 1) {
+        continue;
+      } else {
+        allDots[i].classList.remove("dot-activ");
+      }
+    }
+  }, 10);
+}
 
 //Сбрасывает количество слайдеров
 function ReloadSlider() {
   document.querySelector(".slide-single").remove();
   CreateSlide();
   classNumber = 0;
-  GetCurrentSliderCount()
+  GetCurrentSliderCount();
+  AddDots();
 }
 function GetCurrentSliderCount() {
   countSlide = Number(SelectCountSlider.value);
-  console.log(countSlide);
   GetCountSlide(countSlide);
   newSrc = [];
   for (let i = 0; i < countSlide; i++) {
@@ -47,15 +61,34 @@ function GetCurrentSliderCount() {
 }
 function GetCountSlide(countSlide) {
   currentSliderCount = [];
-  for (let i = 0; i < countSlide-1; i++) {
+  for (let i = 0; i < countSlide - 1; i++) {
     currentSliderCount.push(i);
   }
-  currentSliderCount.unshift(countSlide-1);
-  currentSliderCount.unshift('');
-  console.log(currentSliderCount);
+  currentSliderCount.unshift(countSlide - 1);
+  currentSliderCount.unshift("");
 }
 //............................
-
+//Создание и добавление точек под слайдер
+function AddDots() {
+  let dots = document.querySelectorAll(".btn-check");
+  for (let j = 0; j < dots.length; j++) {
+    dots[j].remove();
+  }
+  for (let i = 0; i < countSlide; i++) {
+    CreateDots(i + 1);
+  }
+}
+function CreateDots(num) {
+  let dot = document.createElement("button");
+  dot.classList.add("btn-check");
+  dot.classList.add(`dot--${num}`);
+  if (num === 1) {
+    dot.classList.add("dot-activ");
+  }
+  dot.textContent = num;
+  DotsList.appendChild(dot);
+}
+//....................................
 //Копирует путь к изображениям
 function CopySrc() {
   let allSlidesImg = document.querySelectorAll(".slide-single");
@@ -82,9 +115,9 @@ function CreateSlide() {
 function SlideNext() {
   BtnBack.onclick = null;
   BtnNext.onclick = null;
-
   setTimeout(function () {
     TimerSlideNext();
+    Render();
   }, 100);
 }
 //............................
@@ -96,6 +129,7 @@ function SlideBack() {
 
   setTimeout(function () {
     TimerSlideBack();
+    Render();
   }, 100);
 }
 //............................

@@ -9,47 +9,105 @@
   </head>
   <body>
     <div class="container">
-      <div class="slidecontainer">
-        <input type="range" min="1" max="100" value="50" class="" id="myRange">
-      </div>
-      <div class="input-block">
-        <p class="text">Выберете количество слайдов</p>
-        <select class="select-number">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-          <option value="6">6</option>
-          <option value="7">7</option>
-          <option value="8">8</option>
-          <option value="9">9</option>
-          <option value="10">10</option>
-        </select>
-        <button class="send" type="submit">Подтвердить</button>
-      </div>
-        <button class="slider-back" type="button">Назад</button>
-        <button class="slider-next" type="button">Вперед</button>
-      <div class="slider">
-        <div class="slider-list">
-          <div class="slider-track">
-            <img src="/img2/img1.jpg"alt=""class="slide-single "/>
-            <img src="/img2/img2.jpg"alt=""class="slide-single "/>
-            <img src="img2/img3.jpg"alt=""class="slide-single "/>
-            <img src="img2/img4.jpg"alt=""class="slide-single "/>
-            <img src="img2/img5.jpg"alt=""class="slide-single "/>
-            <img src="img2/img6.jpg"alt=""class="slide-single "/>
-            <img src="img2/img7.jpg"alt=""class="slide-single"/>
-            <img src="img2/img8.jpg"alt=""class="slide-single"/>
-            <img src="img2/img9.jpg"alt=""class="slide-single"/>
-            <img src="img2/img10.jpg"alt=""class="slide-single"/>
-          </div>
+      <div class="slider-block">
+        <div class="btn slider-back" type="button">
+          <svg
+            width="50px"
+            height="50px"
+            viewBox="0 0 18 17"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g
+              transform="translate(8.500000, 8.500000) scale(-1, 1) translate(-8.500000, -8.500000)"
+            >
+              <polygon
+                class="arrow-6-pl"
+                points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"
+              ></polygon>
+              <polygon
+                class="arrow-6-pl-fixed"
+                points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"
+              ></polygon>
+              <path
+                d="M-1.48029737e-15,0.56157424 L-1.48029737e-15,16.1929159 L9.708,8.33860465 L-2.66453526e-15,0.56157424 L-1.48029737e-15,0.56157424 Z M1.33333333,3.30246869 L7.62533333,8.34246869 L1.33333333,13.4327013 L1.33333333,3.30246869 L1.33333333,3.30246869 Z"
+              ></path>
+            </g>
+          </svg>
         </div>
-        
+        <div class="slider">
+          <div class="slider-list">
+            <div class="slider-track">
+              <img src="/img2/img1.jpg" alt="" class="slide-single" />
+              <img src="/img2/img2.jpg" alt="" class="slide-single" />
+              <img src="img2/img3.jpg" alt="" class="slide-single" />
+              <img src="img2/img4.jpg" alt="" class="slide-single" />
+              <img src="img2/img5.jpg" alt="" class="slide-single" />
+              <img src="img2/img6.jpg" alt="" class="slide-single" />
+              <img src="img2/img7.jpg" alt="" class="slide-single" />
+              <img src="img2/img8.jpg" alt="" class="slide-single" />
+              <img src="img2/img9.jpg" alt="" class="slide-single" />
+              <img src="img2/img10.jpg" alt="" class="slide-single" />
+            </div>
+          </div>
+         
+        </div>
+        <div class="btn slider-next">
+          <svg
+            width="50px"
+            height="50px"
+            viewBox="-1 0 18 17"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g>
+              <polygon
+                class="arrow-6-pl"
+                points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"
+              ></polygon>
+              <polygon
+                class="arrow-6-pl-fixed"
+                points="16.3746667 8.33860465 7.76133333 15.3067621 6.904 14.3175671 14.2906667 8.34246869 6.908 2.42790698 7.76 1.43613596"
+              ></polygon>
+              <path
+                d="M-4.58892184e-16,0.56157424 L-4.58892184e-16,16.1929159 L9.708,8.33860465 L-1.64313008e-15,0.56157424 L-4.58892184e-16,0.56157424 Z M1.33333333,3.30246869 L7.62533333,8.34246869 L1.33333333,13.4327013 L1.33333333,3.30246869 L1.33333333,3.30246869 Z"
+              ></path>
+            </g>
+          </svg>
+        </div>
       </div>
     </div>
-
+    <div class="dots-check">
+      <!-- <button class="btn-check dot--1">1</button>
+      <button class="btn-check dot--2">2</button>
+      <button class="btn-check dot--3">3</button>
+      <button class="btn-check dot--4">4</button>
+      <button class="btn-check dot--5">5</button>
+      <button class="btn-check dot--6">6</button>
+      <button class="btn-check dot--7">7</button>
+      <button class="btn-check dot--8">8</button>
+      <button class="btn-check dot--9">9</button>
+      <button class="btn-check dot--10">10</button> -->
+    </div>
+    <div class="input-block">
+      <p class="text">Выберете количество слайдов</p>
+      <select class="select-number">
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+        <option value="10">10</option>
+      </select>
+    </div>
     <script src="/js/main.js"></script>
+    <script type="module" src="/js/dots.js"></script>
   </body>
 </html>
 
@@ -64,10 +122,7 @@
 <img src="img3/img9.jpg"alt=""class="slide-single"/>
 <img src="img3/img10.jpg"alt=""class="slide-single"/> -->
 
-
-
-
-           <!-- <div class="slider-track">
+<!-- <div class="slider-track">
   <div class="slider-slide slide--1"><img src="/Slider/img/img1.jpg"alt=""class="slide-single"/></div>
   <div class="slider-slide slide--2"><img src="/Slider/img/img2.jpg"alt=""class="slide-single"/></div>
   <div class="slider-slide slide--3"><img src="/Slider/img/img3.jpg"alt=""class="slide-single"/></div>
