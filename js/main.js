@@ -3,33 +3,79 @@ const BtnBack = document.querySelector(".slider-back");
 const BtnNext = document.querySelector(".slider-next");
 const SelectCountSlider = document.querySelector(".select-number");
 const DotsList = document.querySelector(".dots-check");
+const ActiveDots = document.querySelector(".dot-activ");
 const srcSlide = [];
 let classNumber = 0;
 let newSrc = [];
 let offset = 0;
 let countSlide = 1;
-const speedAnimation = 1;
-const stepStop = 5;
+let speedAnimation = 1;
+let stepStop = 5;
 let currentSliderCount = [];
 let dotNumber = 1;
 
 CopySrc();
 CreateSlide();
 ReloadSlider();
-
 BtnNext.onclick = SlideNext;
 BtnBack.onclick = SlideBack;
 SelectCountSlider.onchange = ReloadSlider;
 
-// Render();
+// (length-end+start>end-start+1) 
 
-function Render() {
-  let timer = setInterval(() => {
+DotsList.onclick = (event) => {
+  Dots(event);
+  
+ 
+};
+
+function Dots(event) {
+    DotsList.classList.add('dots-event-non');
+    if (event.target.classList.contains("dot-activ")) return;
+    if (!event.target.classList.contains("btn-check")) return;
+  
+    let tapDotsClass = event.target.className;
+    let tapDotsNum = parseInt(tapDotsClass.match(/\d+/));
+    console.log(tapDotsNum + "На которую нажал");
+    let x = 0;
+    let alldots = document.querySelectorAll(".dots-check");
+    let activ = document.querySelector(".dot-activ").className;
+    let activNum = parseInt(activ.match(/\d+/));
+  
+    if (tapDotsNum > activNum) {
+      let timer = setInterval(() => {
+        SlideNext();
+        let activ = document.querySelector(".dot-activ").className;
+        let activNum = parseInt(activ.match(/\d+/));
+        console.log(activNum +1+ "там где класс активный");
+        if (activNum + 1 === tapDotsNum) {
+          clearInterval(timer);
+          DotsList.classList.remove('dots-event-non');
+        }
+      }, 1000);
+    } else if (tapDotsNum < activNum) {
+      let timer = setInterval(() => {
+        SlideBack();
+        let activ = document.querySelector(".dot-activ").className;
+        let activNum = parseInt(activ.match(/\d+/));
+        console.log(activNum +1 +"там где класс активный");
+        if (activNum - 1 === tapDotsNum) {
+          clearInterval(timer);
+          DotsList.classList.remove('dots-event-non');
+        }
+      }, 1000);
+      console.log(tapDotsNum - activNum);
+    }
+    
+  }
+
+
+//Оценивает текущие положение активного слайда и делает активной нужную точку
+function RenderDots() {
+  setTimeout(() => {
     let tempSlideHtml = document.querySelectorAll(".slide-single");
-    let tempClassName = tempSlideHtml[0].className;
+    let tempClassName = tempSlideHtml[1].className;
     classNumber = parseInt(tempClassName.match(/\d+/));
-    console.log(classNumber);
-
     let curDot = document.querySelector(`.dot--${classNumber}`);
     curDot.classList.add("dot-activ");
     let allDots = document.querySelectorAll(".btn-check");
@@ -40,9 +86,9 @@ function Render() {
         allDots[i].classList.remove("dot-activ");
       }
     }
-  }, 10);
+  }, 300);
 }
-
+//..........................
 //Сбрасывает количество слайдеров
 function ReloadSlider() {
   document.querySelector(".slide-single").remove();
@@ -79,13 +125,14 @@ function AddDots() {
   }
 }
 function CreateDots(num) {
-  let dot = document.createElement("button");
+  let dot = document.createElement("div");
   dot.classList.add("btn-check");
   dot.classList.add(`dot--${num}`);
   if (num === 1) {
     dot.classList.add("dot-activ");
   }
   dot.textContent = num;
+  // dot.textContent = num;
   DotsList.appendChild(dot);
 }
 //....................................
@@ -117,7 +164,7 @@ function SlideNext() {
   BtnNext.onclick = null;
   setTimeout(function () {
     TimerSlideNext();
-    Render();
+    RenderDots();
   }, 100);
 }
 //............................
@@ -129,7 +176,7 @@ function SlideBack() {
 
   setTimeout(function () {
     TimerSlideBack();
-    Render();
+    RenderDots();
   }, 100);
 }
 //............................
@@ -254,6 +301,71 @@ function GetOffsetAnimationGeneric(
       BtnBack.onclick = SlideBack;
     }
   }, speedAnimation);
+
   //Если назад то stepPosition = 5, currentPositionIndex1 = -530; stopIntervalPosition = 5;
   //Если вперед то stepPosition = -5, currentPositionIndex1 = -530; stopIntervalPosition = -5;
 }
+
+
+
+
+
+
+
+
+
+
+
+// есть текущее 4 а нажатое 10, вперед 5 шагов, назад 3 шага
+
+
+// (length-end+start>end-start+1) 
+// // Если длина минус конец плюс начало больше чем конец минус начало плюс 1
+
+// const t = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+
+// let текущее = 3; // start
+// let нажал = 9;// end
+// let длина = 10;// length
+// let первоеУсловие = длина - нажал + текущее; 4
+// let второеУсловие = нажал - текущее +1;7
+
+
+
+
+// let n = 0;
+// for (let j = текущее; j > 1; j--) {
+//       n++;
+// }
+// console.log(n +1+ ' шагов назад');
+
+
+// let k = 0;
+
+// for (let i = текущее; i < нажал; i++) {
+//     ++k;
+
+// }
+// console.log(k+' шагов вперед');
+
+
+
+
+
+// let текущее = 4;//2
+// let нажал = 10;//8
+
+// let n = 0;
+// for (let j = текущее; j > 1; j--) {
+//       n++;
+// }
+// console.log(n +1+ ' шагов назад');
+
+
+// let k = 0;
+
+// for (let i = текущее; i < нажал; i++) {
+//     ++k;
+
+// }
+// console.log(k+' шагов вперед');
