@@ -4,6 +4,7 @@ const BtnNext = document.querySelector(".slider-next");
 const SelectCountSlider = document.querySelector(".select-number");
 const DotsList = document.querySelector(".dots-check");
 const ActiveDots = document.querySelector(".dot-activ");
+const Speed = document.querySelector('#speedRange');
 const srcSlide = [];
 let classNumber = 0;
 let newSrc = [];
@@ -20,55 +21,29 @@ ReloadSlider();
 BtnNext.onclick = SlideNext;
 BtnBack.onclick = SlideBack;
 SelectCountSlider.onchange = ReloadSlider;
-
-// (length-end+start>end-start+1)
-
 DotsList.onclick = (event) => {
-  Dots(event);
-};
-
-function Dots(event) {
   DotsList.classList.add("dots-event-non");
-  if (event.target.classList.contains("dot-activ")) return;
-  if (!event.target.classList.contains("btn-check")) return;
+  DotsSwapSlide(event);
+};
+Speed.onchange = SpedParams;
 
-  let tapDotsClass = event.target.className;
-  let tapDotsNum = parseInt(tapDotsClass.match(/\d+/));
-  console.log(tapDotsNum + "На которую нажал");
-  let x = 0;
-  let alldots = document.querySelectorAll(".dots-check");
-  let activ = document.querySelector(".dot-activ").className;
-  let activNum = parseInt(activ.match(/\d+/));
-
-  if (tapDotsNum > activNum) {
-    let timer = setInterval(() => {
-      SlideNext();
-      let activ = document.querySelector(".dot-activ").className;
-      let activNum = parseInt(activ.match(/\d+/));
-      console.log(activNum + 1 + "там где класс активный");
-      if (activNum + 1 === tapDotsNum) {
-        clearInterval(timer);
-        DotsList.classList.remove("dots-event-non");
-      }
-    }, 1000);
-  } else if (tapDotsNum < activNum) {
-    let timer = setInterval(() => {
-      SlideBack();
-      let activ = document.querySelector(".dot-activ").className;
-      let activNum = parseInt(activ.match(/\d+/));
-      console.log(activNum + 1 + "там где класс активный");
-      if (activNum - 1 === tapDotsNum) {
-        clearInterval(timer);
-        DotsList.classList.remove("dots-event-non");
-      }
-    }, 1000);
-    console.log(tapDotsNum - activNum);
+function SpedParams() {
+  let speedAnim = [25,20,15,10,5,1];
+  let speedStep = [10];
+  if (Speed.value <=5 ) {
+    stepStop = 5;
+    speedAnimation = speedAnim[Speed.value];
+  }else if(Speed.value > 5){
+    speedAnimation = 1;
+    stepStop = speedStep[Speed.value - 6];
   }
-}
+  console.log(stepStop + 'step');
+  console.log(speedAnimation);
 
+}
 //Оценивает текущие положение активного слайда и делает активной нужную точку
 function RenderDots() {
-  setTimeout(() => {
+  // setTimeout(() => {
     let tempSlideHtml = document.querySelectorAll(".slide-single");
     let tempClassName = tempSlideHtml[1].className;
     classNumber = parseInt(tempClassName.match(/\d+/));
@@ -82,7 +57,7 @@ function RenderDots() {
         allDots[i].classList.remove("dot-activ");
       }
     }
-  }, 300);
+  // }, 300);
 }
 //..........................
 //Сбрасывает количество слайдеров
@@ -127,8 +102,6 @@ function CreateDots(num) {
   if (num === 1) {
     dot.classList.add("dot-activ");
   }
-  dot.textContent = num;
-  // dot.textContent = num;
   DotsList.appendChild(dot);
 }
 //....................................
@@ -193,58 +166,6 @@ function TimerSlideBack() {
   //Если вперед то stepPosition = -5, currentPositionIndex1 = -530; stopIntervalPosition = -5;
 }
 
-// function GetClassNumberGeneric(direction) {
-//   let tempSlideHtml = document.querySelectorAll(".slide-single");
-//   let tempClassName = tempSlideHtml[0].className;
-//   let classNumber = parseInt(tempClassName.match(/\d+/));
-
-//   if (direction === "next") {
-//     if (classNumber === srcSlide.length) {
-//       classNumber = 0;
-//     }
-//     return classNumber;
-//   } else if (direction === "back") {
-//     switch (classNumber) {
-//       case 1:
-//         classNumber = 9;
-//         break;
-//       case 10:
-//         classNumber = 8;
-//         break;
-//       case 9:
-//         classNumber = 7;
-//         break;
-//       case 8:
-//         classNumber = 6;
-//         break;
-//       case 7:
-//         classNumber = 5;
-//         break;
-//       case 6:
-//         classNumber = 4;
-//         break;
-//       case 5:
-//         classNumber = 3;
-//         break;
-//       case 4:
-//         classNumber = 2;
-//         break;
-//       case 3:
-//         classNumber = 1;
-//         break;
-//       case 2:
-//         classNumber = 0;
-//         break;
-
-//       default:
-//         break;
-//     }
-
-//     return classNumber;
-//   } else {
-//     console.log("Ошибка тут");
-//   }
-// }
 function GetClassNumberGeneric(direction) {
   let tempSlideHtml = document.querySelectorAll(".slide-single");
   let tempClassName = tempSlideHtml[0].className;
@@ -302,46 +223,24 @@ function GetOffsetAnimationGeneric(
   //Если вперед то stepPosition = -5, currentPositionIndex1 = -530; stopIntervalPosition = -5;
 }
 
-// есть текущее 4 а нажатое 10, вперед 5 шагов, назад 3 шага
+function DotsSwapSlide(event) {
+  if (event.target.classList.contains("dot-activ") || !event.target.classList.contains("btn-check")){
+    DotsList.classList.remove("dots-event-non");
+    return
+  };
+  let tapDotsClass = event.target.className;
+  let tapDotsNum = parseInt(tapDotsClass.match(/\d+/));
+  let activ = document.querySelector(".dot-activ").className;
+  let activNum = parseInt(activ.match(/\d+/));
 
-// (length-end+start>end-start+1)
-// // Если длина минус конец плюс начало больше чем конец минус начало плюс 1
+  if (tapDotsNum > activNum) {
+    CreateSlideGeneric(tapDotsNum - 1, 530);
+    GetOffsetAnimationGeneric(-stepStop, 530, -stepStop, speedAnimation);
+  } else if (tapDotsNum < activNum) {
+    CreateSlideGeneric(tapDotsNum - 1, -530);
+    GetOffsetAnimationGeneric(stepStop, -530, stepStop, speedAnimation);
+  }
+  RenderDots();
 
-// const t = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-
-// let текущее = 3; // start
-// let нажал = 9;// end
-// let длина = 10;// length
-// let первоеУсловие = длина - нажал + текущее; 4
-// let второеУсловие = нажал - текущее +1;7
-
-// let n = 0;
-// for (let j = текущее; j > 1; j--) {
-//       n++;
-// }
-// console.log(n +1+ ' шагов назад');
-
-// let k = 0;
-
-// for (let i = текущее; i < нажал; i++) {
-//     ++k;
-
-// }
-// console.log(k+' шагов вперед');
-
-// let текущее = 4;//2
-// let нажал = 10;//8
-
-// let n = 0;
-// for (let j = текущее; j > 1; j--) {
-//       n++;
-// }
-// console.log(n +1+ ' шагов назад');
-
-// let k = 0;
-
-// for (let i = текущее; i < нажал; i++) {
-//     ++k;
-
-// }
-// console.log(k+' шагов вперед');
+  DotsList.classList.remove("dots-event-non");
+}

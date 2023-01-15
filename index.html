@@ -9,6 +9,29 @@
   </head>
   <body>
     <div class="container">
+      <input type="file" class="upload" id="photo-upload"/>
+      <div class="user-setting">
+        <div class="speed-block">
+          <p class="text-speed">Speed Animation: <span class="speed-current">x1</span></p>
+          <input type="range" name="speed" id="speedRange"  min="0" max="6">
+        </div>
+        <div class="input-block">
+          <p class="text">Выберите количество слайдов</p>
+          <select class="select-number">
+            <option value="10">10</option>
+            <option value="9">9</option>
+            <option value="8">8</option>
+            <option value="7">7</option>
+            <option value="6">6</option>
+            <option value="5">5</option>
+            <option value="4">4</option>
+            <option value="3">3</option>
+            <option value="2">2</option>
+            <option value="1">1</option>
+          </select>
+        </div>
+      </div>
+     
       <div class="slider-block">
         <div class="btn slider-back" type="button">
           <svg
@@ -50,11 +73,8 @@
               <img src="img2/img9.jpg" alt="" class="slide-single" />
               <img src="img2/img10.jpg" alt="" class="slide-single" />
             </div>
-           
           </div>
-          <div class="dots-check">
-          </div>
-         
+          <div class="dots-check"></div>
         </div>
         <div class="btn slider-next">
           <svg
@@ -81,23 +101,10 @@
           </svg>
         </div>
       </div>
+     
     </div>
+
     
-    <div class="input-block">
-      <p class="text">Выберете количество слайдов</p>
-      <select class="select-number">
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-      </select>
-    </div>
     <script src="/js/main.js"></script>
     <script type="module" src="/js/dots.js"></script>
   </body>
